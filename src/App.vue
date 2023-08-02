@@ -1,47 +1,45 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import LogText from './components/LogText.vue'
+import ButtonItem from './components/ButtonItem.vue'
+import MainPhotoContent from './components/MainPhotoContent.vue'
+import { ref } from 'vue'
+
+const items = ref([{ title: 'button' }, { title: 'button' }, { title: 'button' }])
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+    <LogText>LOGO TEXT</LogText>
+    <nav>
+      <ul>
+        <li v-for="(item, index) in items">
+          <ButtonItem :title="item.title" :id="index + 1"></ButtonItem>
+        </li>
+      </ul>
+    </nav>
   </header>
-
   <main>
-    <TheWelcome />
+    <div>
+      <MainPhotoContent></MainPhotoContent>
+    </div>
+    <div>
+      <MainPhotoContent></MainPhotoContent>
+    </div>
   </main>
 </template>
 
-<style scoped>
+<style>
 header {
-  line-height: 1.5;
+  background-color: #555555;
+  height: 135px;
+  width: 100vw;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+main {
+  width: 100vw;
+  background-color: white;
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+ul,
+li {
+  padding: 0px;
 }
 </style>
