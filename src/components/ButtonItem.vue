@@ -20,7 +20,7 @@ li {
   display: inline-flexbox;
   list-style: none;
 }
-button {
+li > button {
   width: 80px;
   height: 40px;
   margin-top: 15px;
