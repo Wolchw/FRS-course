@@ -8,25 +8,36 @@ defineProps({
 })
 </script>
 <template>
-  <button>{{ title }} {{ id }}</button>
+  <div v-if="id == 3" class="fStyle">
+    <button type="button" class="fButton button3">{{ title }} {{ id }}</button>
+  </div>
+  <div v-else class="fStyle">
+    <button type="button" class="fButton">{{ title }} {{ id }}</button>
+  </div>
 </template>
 
-<style>
-ul {
-  margin: 0px;
+<style scoped>
+.fStyle {
+  background-color: #555555;
 }
-li {
-  float: left;
-  display: inline-flexbox;
-  list-style: none;
-}
-li > button {
+.fButton {
   width: 80px;
   height: 40px;
   margin-top: 15px;
-  margin-left: 20px;
   border-radius: 15%;
   border: none;
   background-color: white;
+  font-size: 15px;
+}
+.button3 {
+  margin-top: 10px;
+}
+@media only screen and (width: 768px) {
+  .fButton {
+    width: 70px;
+  }
+  .button3 {
+    margin-top: 10%;
+  }
 }
 </style>
