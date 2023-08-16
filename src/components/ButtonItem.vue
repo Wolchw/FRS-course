@@ -8,16 +8,43 @@ defineProps({
 })
 </script>
 <template>
-  <div v-if="id == 3" class="fStyle">
-    <button type="button" class="fButton button3">{{ title }} {{ id }}</button>
+  <div v-if="id == 3" class="Button-conteiner">
+    <button type="button" class="Button-style">{{ title }} {{ id }}</button>
   </div>
-  <div v-else class="fStyle">
-    <button type="button" class="fButton">{{ title }} {{ id }}</button>
+  <div v-else class="Button-conteiner">
+    <button type="button" class="Button-style">{{ title }} {{ id }}</button>
   </div>
 </template>
 
 <style scoped>
-.fStyle {
+.Button-conteiner {
+  background-color: #555555;
+  padding-top: 3vh;
+}
+.Button-style {
+  width: 80px;
+  height: 40px;
+  border-radius: 15%;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+@media only screen and (min-width: 768px) {
+  .Button-style {
+    width: 80px;
+    height: 40px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .Button-conteiner {
+    background-color: #dedede;
+  }
+  .Button-style {
+    width: 50vw;
+  }
+}
+</style>
+<!-- .fStyle {
   background-color: #555555;
 }
 .fButton {
@@ -32,12 +59,11 @@ defineProps({
 .button3 {
   margin-top: 10px;
 }
-@media only screen and (width: 768px) {
+@media only screen and (min-width: 768px) {
   .fButton {
     width: 70px;
   }
   .button3 {
     margin-top: 10%;
   }
-}
-</style>
+} -->

@@ -2,30 +2,117 @@
 import LogText from './components/LogText.vue'
 import ButtonItem from './components/ButtonItem.vue'
 import MainPhotoContent from './components/MainPhotoContent.vue'
+import HamburgerMenu from './components/HamburgerMenu.vue'
 import { ref } from 'vue'
 
 const items = ref([{ title: 'button' }, { title: 'button' }, { title: 'button' }])
 </script>
 
-<template class="something">
-  <header class="appHeader">
-    <LogText class="lText">LOGO TEXT</LogText>
-    <nav class="appNav">
-      <ul class="appList">
-        <li v-for="(item, index) in items">
+<template>
+  <header class="Header-logo">
+    <LogText class="Header-logo-text">LOGO TEXT</LogText>
+    <nav class="Nav">
+      <ul class="Nav-list">
+        <li v-for="(item, index) in items" class="list-element">
           <ButtonItem :title="item.title" :id="index + 1"></ButtonItem>
         </li>
       </ul>
     </nav>
+    <HamburgerMenu class="Side-menu" />
   </header>
-  <main class="appMain">
-    <MainPhotoContent />
-    <MainPhotoContent />
+  <main class="App-main">
+    <MainPhotoContent class="App-main-content" />
+    <MainPhotoContent class="App-main-content" />
   </main>
   <article class="something"></article>
 </template>
 
 <style scoped>
+.Header-logo {
+  background-color: #555555;
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+  width: 100%;
+}
+.Header-logo-text {
+  color: white;
+  display: flex;
+  background-color: #555555;
+}
+.Nav {
+  display: flex;
+  background-color: #555555;
+  padding-bottom: 2vh;
+}
+.Nav-list {
+  padding: 0;
+  background-color: #555555;
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+.App-main {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  background-color: white;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+}
+.App-main-content {
+  margin-top: auto;
+}
+.Side-menu {
+  display: none;
+}
+@media only screen and (min-width: 768px) {
+  .Header-logo {
+    width: 80vw;
+    height: fit-content;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .Nav {
+    width: 50%;
+    height: 10vh;
+    align-items: end;
+    justify-content: space-around;
+    gap: 21px;
+  }
+  .App-main {
+    width: 68%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .App-main {
+    align-content: end;
+    padding-bottom: 20px;
+  }
+  .Nav-list {
+    display: none;
+  }
+  .Side-menu {
+    display: block;
+    position: fixed;
+    right: 0;
+  }
+}
+</style>
+<!-- .hamburger {
+  display: none;
+}
+.list-element {
+  background-color: #555555;
+}
 .appHeader {
   background-color: #555555;
   height: 135px;
@@ -55,39 +142,10 @@ const items = ref([{ title: 'button' }, { title: 'button' }, { title: 'button' }
   padding: 0px;
   background-color: #555555;
 }
-.appButtton {
-  background-color: blue;
-}
 .something {
   background-color: #e5e5e5;
 
   margin-top: 20px;
   height: 100vh;
   width: 100%;
-}
-@media only screen and (width: 768px) {
-  .appHeader {
-    width: 70vw;
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-
-    height: 10vw;
-  }
-  .appNav {
-    width: 65%;
-    display: flex;
-  }
-  .appList {
-    margin-right: 5%;
-    width: 60%;
-    gap: 10px;
-  }
-  .appMain {
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-</style>
+} -->

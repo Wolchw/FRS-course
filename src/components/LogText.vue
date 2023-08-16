@@ -1,11 +1,18 @@
 <template>
-  <h1 class="h1Text">
+  <h1 class="logo-text">
     <slot></slot>
   </h1>
 </template>
 <style scoped>
-.h1Text {
+.logo-text {
   padding-top: 29px;
-  margin-left: 10px;
+  margin-left: 4vw;
+}
+@media only screen and (min-width: 768px) {
+  .logo-text {
+    padding-top: 0;
+
+    margin-left: 1vw;
+  }
 }
 </style>

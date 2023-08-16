@@ -1,17 +1,18 @@
 <template>
-  <div class="contentImg">
+  <div class="content-Img">
     <img src="/src/assets/img-one-small.jpg" />
   </div>
 </template>
 
 <style scoped>
-.contentImg {
-  padding-top: 20px;
+.content-Img {
+  padding-top: 18px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: white;
 }
-.contentImg > img {
+.content-Img > img {
   border-radius: 100%;
   border: 2px solid black;
-  height: 154px;
-  width: 154px;
 }
 </style>
