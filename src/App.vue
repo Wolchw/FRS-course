@@ -3,28 +3,39 @@ import LogText from './components/LogText.vue'
 import ButtonItem from './components/ButtonItem.vue'
 import MainPhotoContent from './components/MainPhotoContent.vue'
 import HamburgerMenu from './components/HamburgerMenu.vue'
-import { ref } from 'vue'
+import AdvertismentPhoto from './components/AdvertismentPhoto.vue'
+import { ref, computed } from 'vue'
 
 const items = ref([{ title: 'button' }, { title: 'button' }, { title: 'button' }])
+const userScreenWidth = ref(window.innerWidth)
+const responsiveMobile = computed(() => userScreenWidth.value <= 425)
+const responsiveDesktop = computed(() => userScreenWidth.value >= 1366)
+window.addEventListener('resize', () => {
+  userScreenWidth.value = window.innerWidth
+})
 </script>
 
 <template>
-  <header class="Header-logo">
-    <LogText class="Header-logo-text">LOGO TEXT</LogText>
-    <nav class="Nav">
-      <ul class="Nav-list">
-        <li v-for="(item, index) in items" class="list-element">
-          <ButtonItem :title="item.title" :id="index + 1"></ButtonItem>
-        </li>
-      </ul>
-    </nav>
-    <HamburgerMenu class="Side-menu" />
-  </header>
-  <main class="App-main">
-    <MainPhotoContent class="App-main-content" />
-    <MainPhotoContent class="App-main-content" />
-  </main>
-  <article class="something"></article>
+  <body>
+    <header class="Header-logo">
+      <LogText class="Header-logo-text">LOGO TEXT</LogText>
+      <nav class="Nav">
+        <ul class="Nav-list">
+          <li v-for="(item, index) in items" class="list-element">
+            <ButtonItem :title="item.title" :id="index + 1"></ButtonItem>
+          </li>
+        </ul>
+      </nav>
+      <HamburgerMenu class="Side-menu" v-if="responsiveMobile" />
+    </header>
+    <main class="App-main">
+      <MainPhotoContent class="App-main-content" />
+      <MainPhotoContent class="App-main-content" />
+    </main>
+    <article class="something">
+      <AdvertismentPhoto class="Advertisment-content" v-show="responsiveDesktop" />
+    </article>
+  </body>
 </template>
 
 <style scoped>
@@ -68,7 +79,35 @@ const items = ref([{ title: 'button' }, { title: 'button' }, { title: 'button' }
 .Side-menu {
   display: none;
 }
-@media only screen and (min-width: 768px) {
+.Advertisment-content {
+  z-index: 1;
+  margin-top: 10%;
+  margin-left: -8%;
+}
+@media only screen and (min-width: 1366px) {
+  body {
+    display: flex;
+  }
+  .Header-logo {
+    height: 100vh;
+    width: 10%;
+    align-items: center;
+  }
+  .Nav-list {
+    flex-direction: column;
+    align-items: end;
+  }
+  .App-main {
+    width: 50%;
+    height: 70vh;
+    margin-top: 2%;
+    margin-left: 4%;
+    box-shadow: 1px 1px 20px grey;
+    align-content: baseline;
+    z-index: 2;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1365px) {
   .Header-logo {
     width: 80vw;
     height: fit-content;
@@ -107,45 +146,3 @@ const items = ref([{ title: 'button' }, { title: 'button' }, { title: 'button' }
   }
 }
 </style>
-<!-- .hamburger {
-  display: none;
-}
-.list-element {
-  background-color: #555555;
-}
-.appHeader {
-  background-color: #555555;
-  height: 135px;
-  width: 100%;
-  color: white;
-}
-.appMain {
-  width: 100%;
-  background-color: white;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: center;
-}
-.appNav {
-  justify-content: end;
-  background-color: #555555;
-}
-.lText {
-  background-color: #555555;
-}
-.appList {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  list-style-type: none;
-  padding: 0px;
-  background-color: #555555;
-}
-.something {
-  background-color: #e5e5e5;
-
-  margin-top: 20px;
-  height: 100vh;
-  width: 100%;
-} -->

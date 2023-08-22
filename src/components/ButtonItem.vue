@@ -29,7 +29,7 @@ defineProps({
   font-size: 18px;
   cursor: pointer;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 1365px) {
   .Button-style {
     width: 80px;
     height: 40px;
@@ -44,26 +44,3 @@ defineProps({
   }
 }
 </style>
-<!-- .fStyle {
-  background-color: #555555;
-}
-.fButton {
-  width: 80px;
-  height: 40px;
-  margin-top: 15px;
-  border-radius: 15%;
-  border: none;
-  background-color: white;
-  font-size: 15px;
-}
-.button3 {
-  margin-top: 10px;
-}
-@media only screen and (min-width: 768px) {
-  .fButton {
-    width: 70px;
-  }
-  .button3 {
-    margin-top: 10%;
-  }
-} -->
