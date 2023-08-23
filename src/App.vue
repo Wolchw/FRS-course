@@ -4,6 +4,7 @@ import ButtonItem from './components/ButtonItem.vue'
 import MainPhotoContent from './components/MainPhotoContent.vue'
 import HamburgerMenu from './components/HamburgerMenu.vue'
 import AdvertismentPhoto from './components/AdvertismentPhoto.vue'
+import PageForm from './components/PageForm.vue'
 import { ref, computed } from 'vue'
 
 const items = ref([{ title: 'button' }, { title: 'button' }, { title: 'button' }])
@@ -13,6 +14,12 @@ const responsiveDesktop = computed(() => userScreenWidth.value >= 1366)
 window.addEventListener('resize', () => {
   userScreenWidth.value = window.innerWidth
 })
+const showAdv = ref(true)
+const toggleForm = (id) => {
+  if (id === 1) {
+    showAdv.value = !showAdv.value
+  }
+}
 </script>
 
 <template>
@@ -22,7 +29,7 @@ window.addEventListener('resize', () => {
       <nav class="Nav">
         <ul class="Nav-list">
           <li v-for="(item, index) in items" class="list-element">
-            <ButtonItem :title="item.title" :id="index + 1"></ButtonItem>
+            <ButtonItem :title="item.title" :id="index + 1" @click="toggleForm(index + 1)" />
           </li>
         </ul>
       </nav>
@@ -31,9 +38,12 @@ window.addEventListener('resize', () => {
     <main class="App-main">
       <MainPhotoContent class="App-main-content" />
       <MainPhotoContent class="App-main-content" />
+      <div class="Form-form">
+        <PageForm />
+      </div>
     </main>
     <article class="something">
-      <AdvertismentPhoto class="Advertisment-content" v-show="responsiveDesktop" />
+      <AdvertismentPhoto class="Advertisment-content" v-if="showAdv && responsiveDesktop" />
     </article>
   </body>
 </template>
@@ -82,7 +92,16 @@ window.addEventListener('resize', () => {
 .Advertisment-content {
   z-index: 1;
   margin-top: 10%;
-  margin-left: -8%;
+  margin-left: -4%;
+  position: absolute;
+}
+.Form-form {
+  display: flex;
+  background-color: white;
+}
+.buttonBut {
+  background-color: aqua;
+  position: absolute;
 }
 @media only screen and (min-width: 1366px) {
   body {
