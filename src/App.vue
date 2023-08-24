@@ -5,20 +5,32 @@ import MainPhotoContent from './components/MainPhotoContent.vue'
 import HamburgerMenu from './components/HamburgerMenu.vue'
 import AdvertismentPhoto from './components/AdvertismentPhoto.vue'
 import PageForm from './components/PageForm.vue'
-import { ref, computed } from 'vue'
+import { useBreakpoints } from '@vueuse/core'
+import { ref, watch } from 'vue'
 
 const items = ref([{ title: 'button' }, { title: 'button' }, { title: 'button' }])
-const userScreenWidth = ref(window.innerWidth)
-const responsiveMobile = computed(() => userScreenWidth.value <= 425)
-const responsiveDesktop = computed(() => userScreenWidth.value >= 1366)
-window.addEventListener('resize', () => {
-  userScreenWidth.value = window.innerWidth
+const breakpoints = useBreakpoints({
+  mobile: 425,
+  tablet: 768,
+  desktop: 1366
 })
+const responsiveMobile = breakpoints.smallerOrEqual('mobile')
+const responsiveDesktop = breakpoints.greaterOrEqual('desktop')
+watch(responsiveDesktop, (responsiveDesktop) => {
+  showForm.value = responsiveDesktop
+})
+
+let showForm = ref(true)
+
 const showAdv = ref(true)
 const toggleForm = (id) => {
   if (id === 1) {
     showAdv.value = !showAdv.value
   }
+}
+
+const DataFormSubmit = (formData) => {
+  console.log(JSON.stringify(formData))
 }
 </script>
 
@@ -39,7 +51,9 @@ const toggleForm = (id) => {
       <MainPhotoContent class="App-main-content" />
       <MainPhotoContent class="App-main-content" />
       <div class="Form-form">
-        <PageForm />
+        <button @click="showForm = true">Pokaż formularz</button>
+        <button @click="showForm = false">Ukryj formularz</button>
+        <PageForm @submit="DataFormSubmit" v-if="showForm" />
       </div>
     </main>
     <article class="something">

@@ -1,10 +1,9 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted, defineEmits } from 'vue'
 const email = ref('')
 const name = ref('')
 const text = ref('')
 const checked = ref([])
-let showForm = ref(true)
 const currentDate = ref(null)
 
 onMounted(() => {
@@ -15,6 +14,7 @@ onMounted(() => {
 
   currentDate.value = `${year}-${month}-${day}`
 })
+const emit = defineEmits(['submit'])
 const submitForm = () => {
   const formData = {
     email: email.value,
@@ -23,8 +23,7 @@ const submitForm = () => {
     currentDate: currentDate.value,
     text: text.value
   }
-
-  console.log(JSON.stringify(formData))
+  emit('submit', formData)
 }
 const resetForm = () => {
   email.value = ''
@@ -39,27 +38,15 @@ const resetForm = () => {
 
   currentDate.value = `${year}-${month}-${day}`
 }
-const userScreenWidth = ref(window.innerWidth)
-window.addEventListener('resize', () => {
-  userScreenWidth.value = window.innerWidth
-  if (userScreenWidth.value < 1366) {
-    showForm.value = false
-  } else {
-    showForm.value = true
-  }
-})
 </script>
 <template>
-  <div class="Buttons-container">
-    <button @click="showForm = true">Pokaż formularz</button>
-    <button @click="showForm = false">Ukryj formularz</button>
-  </div>
+  <div class="Buttons-container"></div>
   <br />
-  <div v-if="showForm" class="form">
+  <form class="form" @submit.prevent="submitForm">
     <div class="data">
       <input v-model="email" placeholder="Email" class="Basic-data" />
       <br />
-      <input pattern="[A-Z]{1}*" v-model="name" placeholder="Name" class="Basic-data" />
+      <input pattern="[A-Z].*" v-model="name" placeholder="Name" class="Basic-data" />
     </div>
     <div class="data Data-checkbox">
       <input type="checkbox" id="something" value="something" v-model="checked" />
@@ -75,10 +62,10 @@ window.addEventListener('resize', () => {
       <textarea v-model="text" maxlength="150" class="Data-date"></textarea>
     </div>
     <div class="data Data-button-down">
-      <button @click="submitForm" class="Button-down">Wyślij</button>
+      <button class="Button-down">Wyślij</button>
       <button @click="resetForm" class="Button-down">Wyczyść</button>
     </div>
-  </div>
+  </form>
 </template>
 <style scoped>
 .form {
