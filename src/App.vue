@@ -5,22 +5,13 @@ import MainPhotoContent from './components/MainPhotoContent.vue'
 import HamburgerMenu from './components/HamburgerMenu.vue'
 import AdvertismentPhoto from './components/AdvertismentPhoto.vue'
 import PageForm from './components/PageForm.vue'
-import { useBreakpoints } from '@vueuse/core'
 import { ref, watch } from 'vue'
-
+import useResponsive from './composables/useResponsive'
 const items = ref([{ title: 'button' }, { title: 'button' }, { title: 'button' }])
-const breakpoints = useBreakpoints({
-  mobile: 425,
-  tablet: 768,
-  desktop: 1366
-})
-const responsiveMobile = breakpoints.smallerOrEqual('mobile')
-const responsiveDesktop = breakpoints.greaterOrEqual('desktop')
+const { responsiveMobile, responsiveDesktop, showForm } = useResponsive()
 watch(responsiveDesktop, (responsiveDesktop) => {
   showForm.value = responsiveDesktop
 })
-
-let showForm = ref(true)
 
 const showAdv = ref(true)
 const toggleForm = (id) => {
