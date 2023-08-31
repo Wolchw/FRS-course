@@ -8,11 +8,12 @@ import PageForm from './components/PageForm.vue'
 import { ref, watch } from 'vue'
 import useResponsive from './composables/useResponsive'
 const items = ref([{ title: 'button' }, { title: 'button' }, { title: 'button' }])
-const { responsiveMobile, responsiveDesktop, showForm } = useResponsive()
+const { responsiveMobile, responsiveDesktop } = useResponsive()
+
 watch(responsiveDesktop, (responsiveDesktop) => {
   showForm.value = responsiveDesktop
 })
-
+const showForm = ref(true)
 const showAdv = ref(true)
 const toggleForm = (id) => {
   if (id === 1) {
